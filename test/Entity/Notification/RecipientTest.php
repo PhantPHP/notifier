@@ -11,13 +11,13 @@ final class RecipientTest extends \PHPUnit\Framework\TestCase
     public function testInterface(): void
     {
         $item = new Recipient(
-            'john@doe.com',
+            'john.doe@domain.ext',
             'John DOE'
         );
         $this->assertInstanceOf(Recipient::class, $item);
 
         $this->assertIsString($item->id);
-        $this->assertEquals('john@doe.com', $item->id);
+        $this->assertEquals('john.doe@domain.ext', $item->id);
 
         $this->assertIsString($item->name);
         $this->assertEquals('John DOE', $item->name);

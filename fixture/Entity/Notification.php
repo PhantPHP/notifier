@@ -31,7 +31,7 @@ final class Notification
                 'Action'
             ),
             new Recipient(
-                'john@doe.com',
+                'john.doe@domain.ext',
                 'John DOE'
             )
         );

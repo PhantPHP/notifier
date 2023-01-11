@@ -15,7 +15,7 @@ final class Email
         return new EmailTransportEntity(
             new EmailBuilder(),
             new EmailSender(),
-            'john@doe.com',
+            'john.doe@domain.ext',
             'John DOE'
         );
     }
