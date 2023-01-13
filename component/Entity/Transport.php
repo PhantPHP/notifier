@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phant\Notifier\Entity;
 
-use Phant\Notifier\Entity\Channel;
+use Phant\Notifier\Entity\Transport\Channel;
 
 abstract class Transport
 {
@@ -17,6 +17,6 @@ abstract class Transport
     public function canBeTransported(
         Notification $notification
     ): bool {
-        return $notification->channels->contains($this->getChannel());
+        return $notification->channel == $this->getChannel();
     }
 }

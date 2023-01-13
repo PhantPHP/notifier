@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Test\Factory;
 
-use Phant\Notifier\Entity\Channel;
 use Phant\Notifier\Entity\Notification;
+use Phant\Notifier\Entity\Transport\Channel;
 use Phant\Notifier\Factory\Notification as NotificationFactory;
 use Fixture\Entity\Notification as FixtureNotification;
 
@@ -13,29 +13,13 @@ final class NotificationTest extends \PHPUnit\Framework\TestCase
 {
     public function testMake(): void
     {
-        $fixture = FixtureNotification::get();
+        $fixture = FixtureNotification::getChat();
         $item = NotificationFactory::make(
-            Channel::Email->value,
-            $fixture->title,
-            $fixture->message,
-            $fixture->action->url,
-            $fixture->action->label,
-            $fixture->recipient->id,
-            $fixture->recipient->name
-        );
-        $this->assertInstanceOf(Notification::class, $item);
-
-        $fixture = FixtureNotification::get();
-        $item = NotificationFactory::make(
-            [
-                Channel::Email->value
-            ],
-            $fixture->title,
-            $fixture->message,
-            $fixture->action->url,
-            $fixture->action->label,
-            $fixture->recipient->id,
-            $fixture->recipient->name
+            (string) $fixture->type->value,
+            $fixture->content,
+            $fixture->action,
+            (string) $fixture->recipient->value,
+            (string) $fixture->channel->value,
         );
         $this->assertInstanceOf(Notification::class, $item);
     }

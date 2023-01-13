@@ -9,6 +9,9 @@
             "email": "lennyrouanet@users.noreply.github.com"
         }
     ],
+    "config": {
+        "vendor-dir": ".package"
+    },
     "require": {
         "php": ">=8.1",
         "phant/data-structure": "4.*",
@@ -20,10 +23,10 @@
         "phpunit/phpunit": "9.*"
     },
     "scripts": {
-        "lint": "vendor/bin/php-cs-fixer fix ./ --rules=@PSR12",
-        "analyse": "vendor/bin/phpstan analyse component --memory-limit=4G",
-        "test": "vendor/bin/phpunit test --testdox",
-        "coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit -d memory_limit=4G"
+        "lint": ".package/bin/php-cs-fixer fix ./ --rules=@PSR12",
+        "analyse": ".package/bin/phpstan analyse component",
+        "test": ".package/bin/phpunit test --testdox",
+        "coverage": "XDEBUG_MODE=coverage .package/bin/phpunit"
     },
     "autoload": {
         "psr-4": {

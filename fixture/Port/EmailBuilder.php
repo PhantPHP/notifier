@@ -9,12 +9,12 @@ final class EmailBuilder implements \Phant\EmailSender\Port\EmailBuilder
     public function getText(
         mixed $notification
     ): string {
-        return $notification->message;
+        return (string) $notification->content->body;
     }
 
     public function getHtml(
         mixed $notification
     ): string {
-        return $notification->message;
+        return '<p>' . $notification->content->body . '</p>';
     }
 }

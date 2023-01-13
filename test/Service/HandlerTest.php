@@ -26,7 +26,7 @@ final class HandlerTest extends \PHPUnit\Framework\TestCase
         $this->addToAssertionCount(1);
     }
 
-    public function testDispatchCanbeTransported(): void
+    public function testDispatchCanBeTransported(): void
     {
         $this->fixture->dispatch(
             FixtureNotification::getChat()

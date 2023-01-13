@@ -5,56 +5,39 @@ declare(strict_types=1);
 namespace Phant\Notifier\Factory;
 
 use Phant\Notifier\Entity\Notification as NotificationEntity;
-use Phant\Notifier\Entity\Channel;
-use Phant\Notifier\Entity\Channel\Collection as ChannelCollection;
 use Phant\Notifier\Entity\Notification\Action;
+use Phant\Notifier\Entity\Notification\Content;
 use Phant\Notifier\Entity\Notification\Recipient;
+use Phant\Notifier\Entity\Notification\Type;
+use Phant\Notifier\Entity\Transport\Channel;
 
 class Notification
 {
     public static function make(
-        string|array|Channel|ChannelCollection $channels,
-        string $title,
-        string $message,
-        ?string $actionUrl,
-        ?string $actionLabel,
-        ?string $recipientId,
-        ?string $recipientName
+        string|Type $type,
+        Content $content,
+        null|Action $action,
+        string|Recipient $recipient,
+        string|Channel $channel
     ): NotificationEntity {
-        if (is_string($channels)) {
-            $channels = Channel::from($channels);
+        if (is_string($type)) {
+            $type = Type::from($type);
         }
 
-        if (is_array($channels)) {
-            $channelsList = new ChannelCollection();
-            foreach ($channels as $channel) {
-                $channelsList->add(
-                    Channel::from($channel)
-                );
-            }
-            $channels = $channelsList;
+        if (is_string($recipient)) {
+            $recipient = new Recipient($recipient);
         }
 
-        if (is_a($channels, Channel::class)) {
-            $channels = (new ChannelCollection())
-                ->add(
-                    $channels
-                )
-            ;
+        if (is_string($channel)) {
+            $channel = Channel::from($channel);
         }
 
         return new NotificationEntity(
-            $channels,
-            $title,
-            $message,
-            $actionUrl ? new Action(
-                $actionUrl,
-                $actionLabel
-            ) : null,
-            $recipientId ? new Recipient(
-                $recipientId,
-                $recipientName
-            ) : null
+            $type,
+            $content,
+            $action,
+            $recipient,
+            $channel
         );
     }
 }

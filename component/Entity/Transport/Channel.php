@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phant\Notifier\Entity;
+namespace Phant\Notifier\Entity\Transport;
 
 enum Channel: string
 {

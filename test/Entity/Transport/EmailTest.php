@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Entity\Transport;
 
-use Phant\Notifier\Entity\Channel;
+use Phant\Notifier\Entity\Transport\Channel;
 use Phant\Notifier\Entity\Transport\Email;
 use Fixture\Entity\Notification as FixtureNotification;
 use Fixture\Entity\Transport\Email as FixtureEmailTransport;

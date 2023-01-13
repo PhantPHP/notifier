@@ -8,8 +8,8 @@ use Phant\EmailSender\Port\EmailBuilder;
 use Phant\EmailSender\Port\EmailSender;
 use Phant\EmailSender\Service\HtmlToText;
 use Phant\DataStructure\Web\Email as EmailMessage;
-use Phant\Notifier\Entity\Channel;
 use Phant\Notifier\Entity\Notification;
+use Phant\Notifier\Entity\Transport\Channel;
 
 final class Email extends \Phant\Notifier\Entity\Transport
 {
@@ -38,13 +38,13 @@ final class Email extends \Phant\Notifier\Entity\Transport
         Notification $notification
     ): EmailMessage {
         return EmailMessage::make(
-            $notification->title,
+            (string) $notification->content->subject,
             $this->emailBuilder->getText($notification),
             $this->emailBuilder->getHtml($notification),
             $this->fromEmailAddress,
             $this->fromName,
-            $notification->recipient->id,
-            $notification->recipient->name
+            (string) ($notification->recipient->value?->emailAddress ?? $notification->recipient->value),
+            $notification->recipient->value?->name ?? null
         );
     }
 }

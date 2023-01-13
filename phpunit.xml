@@ -1,4 +1,4 @@
-<phpunit bootstrap="vendor/autoload.php">
+<phpunit bootstrap=".package/autoload.php">
 	<testsuites>
 		<testsuite name="component">
 			<directory>test</directory>
