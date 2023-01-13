@@ -1,0 +1,42 @@
+{
+    "name": "phant/notifier",
+    "description": "Manage notifications easily",
+    "license": "MIT",
+    "keywords": ["notification manager", "notification component", "notification service", "notification sender", "notifier manager", "notifier component", "notifier service", "notifier sender"],
+    "authors": [
+        {
+            "name": "Lenny ROUANET",
+            "email": "lennyrouanet@users.noreply.github.com"
+        }
+    ],
+    "config": {
+        "vendor-dir": ".package"
+    },
+    "require": {
+        "php": ">=8.1",
+        "phant/data-structure": "4.*",
+        "phant/email-sender": "2.*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "3.*",
+        "phpstan/phpstan": "1.*",
+        "phpunit/phpunit": "9.*"
+    },
+    "scripts": {
+        "lint": ".package/bin/php-cs-fixer fix ./ --rules=@PSR12",
+        "analyse": ".package/bin/phpstan analyse component",
+        "test": ".package/bin/phpunit test --testdox",
+        "coverage": "XDEBUG_MODE=coverage .package/bin/phpunit"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phant\\Notifier\\": "component/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fixture\\": "fixture",
+            "Test\\": "test"
+        }
+    }
+}
