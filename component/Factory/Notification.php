@@ -10,6 +10,7 @@ use Phant\Notifier\Entity\Notification\Content;
 use Phant\Notifier\Entity\Notification\Recipient;
 use Phant\Notifier\Entity\Notification\Type;
 use Phant\Notifier\Entity\Transport\Channel;
+use Phant\Notifier\Factory\Notification\Recipient as RecipientFactory;
 
 class Notification
 {
@@ -24,12 +25,12 @@ class Notification
             $type = Type::from($type);
         }
 
-        if (is_string($recipient)) {
-            $recipient = new Recipient($recipient);
-        }
-
         if (is_string($channel)) {
             $channel = Channel::from($channel);
+        }
+
+        if (is_string($recipient)) {
+            $recipient = RecipientFactory::make($recipient, $channel);
         }
 
         return new NotificationEntity(

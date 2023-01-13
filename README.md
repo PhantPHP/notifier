@@ -13,10 +13,13 @@ PHP >= 8.1
 
 ```php
 use Phant\Notifier\Service\Handler as NotifierHandler;
-use Phant\Notifier\Entity\Channel;
+use Phant\Notifier\Entity\Notification\Action as NotificationAction;
+use Phant\Notifier\Entity\Notification\Type as NotificationType;
+use Phant\Notifier\Factory\Notification as NotificationFactory;
+use Phant\Notifier\Factory\Notification\Content as NotificationContentFactory;
+use Phant\Notifier\Entity\Transport\Channel;
 use Phant\Notifier\Entity\Transport\Collection as NotifierTransportCollection;
 use Phant\Notifier\Entity\Transport\Email as NotifierTransportEmail;
-use Phant\Notifier\Factory\Notification as NotificationFactory;
 use App\EmailBuilder;
 use App\EmailSender;
 
@@ -34,13 +37,20 @@ $notifierHandler = new NotifierHandler(
 
 $notifierHandler->dispatch(
 	NotificationFactory::make(
-		Channel::Email,
-		'Hello world!',
-		'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-		'https://domain.ext/path',
-		'Action',
-		'john.doe@domain.ext',
-		'John DOE'
+		NotificationType::Information,
+		NotificationContentFactory::make(
+			'Hello world!',
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			[
+				'Foo' => 'Bar'
+			]
+		),
+		new NotificationAction(
+			'https://domain.ext/path',
+			'Action'
+		),
+		'john.doe@domain.ext'
+		Channel::Email
 	)
 );
 ```

@@ -13,12 +13,12 @@ final class NotificationTest extends \PHPUnit\Framework\TestCase
 {
     public function testMake(): void
     {
-        $fixture = FixtureNotification::getChat();
+        $fixture = FixtureNotification::get();
         $item = NotificationFactory::make(
             (string) $fixture->type->value,
             $fixture->content,
             $fixture->action,
-            (string) $fixture->recipient->value,
+            (string) $fixture->recipient->value->emailAddress->value,
             (string) $fixture->channel->value,
         );
         $this->assertInstanceOf(Notification::class, $item);

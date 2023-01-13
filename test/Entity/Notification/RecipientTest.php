@@ -26,7 +26,6 @@ final class RecipientTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-
     public function testInterface(): void
     {
         $this->assertIsString($this->fixture->value);
