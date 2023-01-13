@@ -17,10 +17,12 @@ class Content
         null|array|Metadatas $metadatas
     ): ContentEntity {
         if (is_string($subject)) {
+            $subject = trim($subject);
             $subject = new Subject($subject);
         }
 
         if (is_string($body)) {
+            $body = trim($body);
             $body = new Body($body);
         }
 
