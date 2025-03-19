@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Phant\Notifier\Entity\Transport;
 
-use Phant\EmailSender\Port\EmailBuilder;
 use Phant\EmailSender\Port\EmailSender;
+use Phant\EmailSender\Service\EmailBuilder;
 use Phant\EmailSender\Service\HtmlToText;
 use Phant\DataStructure\Web\Email as EmailMessage;
 use Phant\Notifier\Entity\Notification;
@@ -39,8 +39,8 @@ final class Email extends \Phant\Notifier\Entity\Transport
     ): EmailMessage {
         return EmailMessage::make(
             (string) $notification->content->subject,
-            $this->emailBuilder->getText($notification),
-            $this->emailBuilder->getHtml($notification),
+            (new HtmlToText())((string) $notification->content->body),
+            (string) $notification->content->body,
             $this->fromEmailAddress,
             $this->fromName,
             (string) ($notification->recipient->value?->emailAddress ?? $notification->recipient->value),
