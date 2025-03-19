@@ -14,8 +14,8 @@
     },
     "require": {
         "php": ">=8.1",
-        "phant/data-structure": "4.*",
-        "phant/email-sender": "2.*"
+        "phant/data-structure": "5.*",
+        "phant/email-sender": "3.*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.*",
