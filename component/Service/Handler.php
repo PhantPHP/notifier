@@ -17,7 +17,7 @@ final class Handler
     public function dispatch(
         Notification $notification
     ): void {
-        foreach ($this->transports->itemsIterator() as $transport) {
+        foreach ($this->transports->iterate() as $transport) {
             if (!$transport->canBeTransported($notification)) {
                 continue;
             }
